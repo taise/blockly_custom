@@ -1,10 +1,13 @@
 {
   "extends": "airbnb-base",
   "rules": {
-    "no-extra-semi": "warn"
+    "no-extra-semi": "warn",
+    "no-alert": "off"
   },
   "globals": {
     "document": true,
-    "Blockly": true
+    "window": true,
+    "Blockly": true,
+    "Interpreter": true
   }
 }
