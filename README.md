@@ -1,6 +1,6 @@
-# Blockly customize sample
+# Blockly customize
 
-[Blockly](https://developers.google.com/blockly/)
+[Blockly](https://developers.google.com/blockly/) Customize sample
 
 
 ## Getting started
@@ -18,3 +18,9 @@ Install yarn & dependencies
 $ npm install yarn -g
 $ yarn
 ```
+
+Run http-server
+```
+$ npm run http-server
+```
+
