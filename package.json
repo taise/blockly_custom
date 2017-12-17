@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "git@github.com:taise/blockly_custom.git",
   "author": "taise <taise515@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "eslint": "^4.13.1"
+  }
 }
