@@ -1,0 +1,8 @@
+{
+  "name": "blockly_custom",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:taise/blockly_custom.git",
+  "author": "taise <taise515@gmail.com>",
+  "license": "MIT"
+}
