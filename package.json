@@ -5,10 +5,15 @@
   "author": "taise <taise515@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "http-server": "http-server -o -d false -c 0"
+    "http-server": "http-server -o -d false -c0",
+    "eslint": "eslint public/index.js"
   },
   "dependencies": {
     "eslint": "^4.13.1",
     "http-server": "^0.10.0"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0"
   }
 }
