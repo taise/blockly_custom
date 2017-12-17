@@ -5,7 +5,11 @@
   "repository": "git@github.com:taise/blockly_custom.git",
   "author": "taise <taise515@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "http-server": "http-server -o -d false -c 0"
+  },
   "dependencies": {
-    "eslint": "^4.13.1"
+    "eslint": "^4.13.1",
+    "http-server": "^0.10.0"
   }
 }
