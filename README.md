@@ -9,7 +9,7 @@ Install node v9.3.0
 
 ```
 $ brew install nodebrew
-$ nodebrew install v9.3.0
+$ nodebrew install-binary v9.3.0
 ```
 
 Install yarn & dependencies
