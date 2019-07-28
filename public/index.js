@@ -1,3 +1,7 @@
+Array.prototype.clone = function() {
+  return this.slice(0);
+};
+
 const workspace = Blockly.inject(
   'blocklyDiv',
   {
@@ -5,35 +9,54 @@ const workspace = Blockly.inject(
     trashcan: true,
   },
 );
-function showCode() {
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-  const pre = document.getElementById('jsCode');
-  pre.innerHTML = Blockly.JavaScript.workspaceToCode(workspace);
+
+function repeatNumber(block) {
+  if (block.type !== "controls_repeat") {
+    throw "This block is NOT controls_repeat.";
+  }
+
+  var n = block.inputList[0].fieldRow[0].text_;
+  var i = parseInt(n);
+  if (isNaN(i)) {
+    return 0;
+  }
+  return i;
+};
+
+function parseBlockTree(blocks, execList) {
+  for (;;) {
+    let block = blocks.pop();
+    if(block === void 0) {
+      return execList;
+    }
+    execList.push(block.type)
+
+    switch (block.type) {
+    case "controls_repeat":
+      const n = repeatNumber(block);
+      for (let i = 1; i <= n; i++) {
+        execList = parseBlockTree(block.childBlocks_.clone(), execList);
+      }
+      break;
+    default:
+      if(block.childBlocks_.length > 0) {
+        execList = parseBlockTree(block.childBlocks_.clone(), execList);
+      }
+      break;
+    }
+  }
+
+  return execList;
 }
 
 function runCode() {
-  let maxSteps = 10000;
-  const code = Blockly.JavaScript.workspaceToCode(workspace);
+  let execList = [];
+  const blocks = workspace.topBlocks_.clone();
 
-  function initialize(interpreter, scope) {
-    function alertWrapper(text) {
-      const msg = text ? text.toString() : '';
-      return interpreter.createPrimitive(window.alert(msg));
-    }
-
-    interpreter.setProperty(scope, 'alert', interpreter.createNativeFunction(alertWrapper));
-  }
-
-  const jsInterpreter = new Interpreter(code, initialize);
-  while (jsInterpreter.step() && maxSteps) {
-    maxSteps -= 1;
-  }
-  if (!maxSteps) {
-    throw EvalError('Infinite loop.');
-  }
-  jsInterpreter.run();
+  execList = parseBlockTree(blocks, execList);
+  console.log("# Execution List")
+  execList.forEach( (exec) => console.log(exec) );
 }
 
-document.getElementById('showCode').addEventListener('click', showCode, false);
 document.getElementById('runCode').addEventListener('click', runCode, false);
 
